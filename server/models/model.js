@@ -46,6 +46,11 @@ const Report = sequelize.define('Report',{
     idTicket:{type:DataTypes.BIGINT, allowNull:false},
     idTicket:{type:DataTypes.BIGINT, allowNull:false},
 })
+const Token = sequelize.define('Token',{
+  idToken:{type:DataTypes.BIGINT, autoIncrement:true, primaryKey:true},
+  idEmployee:{type:DataTypes.BIGINT, allowNull:false},
+  refreshToken:{type:DataTypes.STRING(1024),allowNull:false}
+})
 
 Employee.hasMany(Appoitment, {
     foreignKey: 'idEmployee',
@@ -103,4 +108,4 @@ Employee.hasMany(Appoitment, {
     targetKey: 'idReport',
   });
 
-module.exports = {Employee, Appoitment, Patience, Ticket, Diagnosis, Report}
+module.exports = {Employee, Appoitment, Patience, Ticket, Diagnosis, Report, Token}

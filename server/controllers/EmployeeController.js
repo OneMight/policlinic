@@ -1,5 +1,6 @@
 const {Employee} = require('../models/model');
 const bcrypt = require('bcrypt');
+const userService = require('../services/userService');
 class EmployeeController{
     async getEmployees(req,res){
         const { sortBy = 'idEmployee', order = 'ASC'} = req.query;
@@ -14,7 +15,7 @@ class EmployeeController{
         })
     }
     async createEmployee(req,res){
-        const {isAdmin,password,FIO_Employee,Category,Speciality} = req.body;
+        const {password,FIO_Employee,Category,Speciality, isAdmin} = req.body;
         try{
             const hashPassword = await bcrypt.hash(password,3);
             const employee = await Employee.create({
@@ -29,5 +30,27 @@ class EmployeeController{
             return res.status(500).json({ message: `Internal server error: ${error}` });
         }
     }
+    async loginEmployee(req,res){
+        try{
+            const {FIO_Employee, password} = req.body;
+            const userData = await userService.login(FIO_Employee,password);
+            res.cookie('refreshToken', userData.refreshToken,{maxAge:10*24*60*60*1000, httpOnly:true})
+            return res.status(200).json(userData)
+
+        } catch (error){
+            return res.status(500).json({message: `Internal server error ${error}`})
+        }
+    }
+    async logout(req,res){
+        try{
+            const {refreshToken} = req.body;
+            await userService.logout(refreshToken);
+            res.clearCookie('refreshToken');
+            return res.status(200).json({ message: 'Successfully logged out' });
+        } catch (error){
+            return res.status(500).json({message: `Internal server error ${error}`})
+        }
+    }
+
 }
 module.exports = new EmployeeController();
