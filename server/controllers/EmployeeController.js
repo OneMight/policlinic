@@ -1,6 +1,10 @@
 const {Employee} = require('../models/model');
 const bcrypt = require('bcrypt');
 const userService = require('../services/userService');
+const UserDto = require('../dto/userdto');
+const tokenService = require('../services/tokenService');
+const cookieParser = require('cookie-parser');
+
 class EmployeeController{
     async getEmployees(req,res){
         const { sortBy = 'idEmployee', order = 'ASC'} = req.query;
@@ -34,8 +38,8 @@ class EmployeeController{
         try{
             const {FIO_Employee, password} = req.body;
             const userData = await userService.login(FIO_Employee,password);
-            res.cookie('refreshToken', userData.refreshToken,{maxAge:10*24*60*60*1000, httpOnly:true})
-            return res.status(200).json(userData)
+            res.cookie('refreshToken', userData.refreshToken,{maxAge:24*60*60*1000, httpOnly:true,})
+            return res.status(200).json(userData.refreshToken)
 
         } catch (error){
             return res.status(500).json({message: `Internal server error ${error}`})
@@ -49,6 +53,16 @@ class EmployeeController{
             return res.status(200).json({ message: 'Successfully logged out' });
         } catch (error){
             return res.status(500).json({message: `Internal server error ${error}`})
+        }
+    }
+    async getUserByToken(req,res){
+        try{
+            const cookies = req.cookies
+            const refreshToken = cookieParser.signedCookie(cookies.refreshToken, process.env.SECRET_KEY)
+            const user = await tokenService.getDataByToken(refreshToken)
+            return res.status(200).json(user.userDto)
+        } catch (error){
+            return res.status(500).json({message: `${error}`});
         }
     }
 

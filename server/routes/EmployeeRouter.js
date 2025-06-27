@@ -7,5 +7,5 @@ router.get('/', EmployeeController.getEmployees);
 router.post('/create', EmployeeController.createEmployee);
 router.post('/login', EmployeeController.loginEmployee);
 router.post('/logout', EmployeeController.logout);
-
+router.post('/token',EmployeeController.getUserByToken);
 module.exports = router

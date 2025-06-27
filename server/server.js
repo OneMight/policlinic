@@ -3,7 +3,7 @@ const cors = require('cors');
 const express = require('express');
 const sequelize = require('./db.js');
 const routes = require('./routes/index.js');
-
+const cookieParser = require('cookie-parser')
 const PORT = process.env.PORT || 5000;  
 const app = express();
 
@@ -11,13 +11,16 @@ app.use(cors({
     origin: 'http://localhost:5173',
     credentials: true
 }));
+app.use(cookieParser())
 app.use(express.json());
 app.use('/api', routes);
+
 const start = async () => {
     try {
         await sequelize.authenticate();
         console.log('Соединение с базой данных успешно!');
         await sequelize.sync(); 
+        
         app.listen(PORT, () => {
             console.log(`Server running at http://localhost:${PORT}`);
         });

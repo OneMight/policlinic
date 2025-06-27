@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const {Token} = require('../models/model')
+const {Token} = require('../models/model');
 
 class TokenService{
     generateToken(payload){
@@ -30,6 +30,18 @@ class TokenService{
             }
         })
         return tokenData;
+    }
+    async getDataByToken(refreshToken){
+        const tokenData = await Token.findOne({
+            where:{
+                refreshToken
+            }
+        })
+        if(!tokenData){
+            return new Error({message: `User not authorized`})
+        }
+        const decoded = jwt.verify(refreshToken,process.env.SECRET_REFRESH_KEY)
+        return decoded;
     }
 }
 
