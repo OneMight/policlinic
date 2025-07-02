@@ -1,25 +1,37 @@
 import Input from '../../../entity/input/input'
-import { Button } from '../../../entity/Button/index'
 import { useState } from 'react'
-export const Auth = () => {
+import { LoginUser } from '../../../shared/api/userApi'
+import { useNavigate } from 'react-router-dom'
+import {ROUTES} from '../../../shared/routes'
 
+export const Auth = () => {
+    const navigate = useNavigate()
     const [FNS,setFNS] = useState('')
     const [password, setPassword] = useState('')
-
-    const handleAuth = () =>{
-
+    const handleLogin = () =>{
+        const data = LoginUser(FNS,password)
+        if(!data){
+            //Изменить на алерт меню
+           return console.log("Ошибка авторизации")
+        }
+        navigate(ROUTES.ADMIN)
     }
-
+    
     return(
         <main className="flex items-center flex-col h-1/3 w-1/3 bg-slate-400 min-w-[270px]">
             <div className="border-b-2 border-white w-full text-center">
                 <p className="text-2xl m-5">Авторизация</p>
             </div>
-            <div className='flex flex-col items-center justify-around p-5 gap-6'>
-                <Input placeholder="Ф.И.О..." type='text' method={setFNS}/>
-                <Input placeholder="Пароль..." type='password' method={setPassword}/>
-                <Button method={handleAuth}/>
-            </div>
+            <form onSubmit={() => handleLogin()} className='flex flex-col items-center justify-around p-5 gap-6'>
+                <Input placeholder="Ф.И.О..." type='text' width='w-64' method={setFNS}/>
+                <Input placeholder="Пароль..." type='password' width='w-64' method={setPassword}/>
+                <button
+                    className="w-36 bg-white p-1 text-xl rounded-lg mt-5
+                        active:bg-white
+                    transition-all delay-40 hover:bg-stone-300">
+                        Войти
+                </button>
+            </form>
         </main>
     )
 }
