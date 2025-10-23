@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import {axiosInstance} from './index'
-export const LoginUser = async (FNS:string, password:string) => {
-    try{
-        const response = await axiosInstance.post('api/employee/login',{
+export const LoginUser = async (FNS:string, password:string) : Promise<string | unknown> => {
+    try {
+         const response = await axiosInstance.post('api/employee/login',{
             FIO_Employee:FNS,
             password,
         })
         return response.data;
-    } catch (error){
-        console.error(error)
+    } catch (error) {
+       return error
     }
 }
 
@@ -33,4 +33,23 @@ export const useGetDataToken = () =>{
     error,
     isLoading
    }
+}
+
+export const Logout = async () =>{
+    try{
+        axiosInstance.post('api/employee/logout')
+    } catch(error){
+        console.log(error)
+    }
+}
+export const isAdmin = async(FNS:string) : Promise<boolean | unknown> =>  {
+    try {
+         const response = await axiosInstance.post('api/employee/isAdmin',{
+     FIO_Employee: FNS,
+    })
+    return response.data
+    } catch (error) {
+        return error
+    }
+   
 }

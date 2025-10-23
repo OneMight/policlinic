@@ -7,11 +7,14 @@ import { Admin } from "./admin/index"
 function App() {
   return (
     <main className="flex items-center justify-between flex-col min-h-screen">
-      <Header/>
+
         <BrowserRouter>
+        <Header/>
           <Routes>
+            
             <Route path={ROUTES.AUTH} element={<Auth/>}/>
             <Route path={ROUTES.ADMIN} element={<Admin/>}/>
+            
           </Routes>
         </BrowserRouter>
       <Footer/>

@@ -39,15 +39,16 @@ class EmployeeController{
             const {FIO_Employee, password} = req.body;
             const userData = await userService.login(FIO_Employee,password);
             res.cookie('refreshToken', userData.refreshToken,{maxAge:24*60*60*1000, httpOnly:true,})
-            return res.status(200).json(userData.refreshToken)
+            return res.status(200).json()
 
         } catch (error){
-            return res.status(500).json({message: `Internal server error ${error}`})
+            return res.status(500).json('Login or password is incorrect')
         }
     }
     async logout(req,res){
         try{
-            const {refreshToken} = req.body;
+            const cookies = req.cookies
+            const refreshToken = cookieParser.signedCookie(cookies.refreshToken, process.env.SECRET_KEY)
             await userService.logout(refreshToken);
             res.clearCookie('refreshToken');
             return res.status(200).json({ message: 'Successfully logged out' });
@@ -63,6 +64,19 @@ class EmployeeController{
             return res.status(200).json(user.userDto)
         } catch (error){
             return res.status(500).json({message: `${error}`});
+        }
+    }
+    async isAdmin(req, res){
+        try {
+            const {FIO_Employee} = req.body;
+            const user = await Employee.findOne({
+                where:{
+                    FIO_Employee
+                }
+            })
+            return res.status(200).json(user.isAdmin)
+        } catch (error) {
+            return res.status(500).json(error.message)
         }
     }
 
