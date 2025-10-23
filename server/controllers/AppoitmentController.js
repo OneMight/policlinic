@@ -15,17 +15,17 @@ class AppoitmentController{
     async createAppoitment(req,res){
         const {diagnose, idTicket,FIO_Employee} = req.body;
         try{
-            const employee = await Employee.findAll({
+            const employee = await Employee.findOne({
                 where:{
                     FIO_Employee: FIO_Employee,
                 }
             })
-            const diagnosis = await Diagnosis.findAll({
+            const diagnosis = await Diagnosis.findOne({
                 where:{
                     name: diagnose,
                 }
             })
-            const appoitment = await Patience.create({
+            const appoitment = await Appoitment.create({
                 idTicket,
                 diagnose,
                 idDiagnose: diagnosis.idDiagnose,
@@ -34,7 +34,7 @@ class AppoitmentController{
             })
             return res.status(200).json(appoitment);
         } catch(e){
-            return res.status(500).json('Internal server error '+error);
+            return res.status(500).json('Internal server error '+e);
         }
     }
 }

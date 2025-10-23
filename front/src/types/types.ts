@@ -2,6 +2,7 @@ export interface IInput{
     type:string,
     placeholder:string,
     width: string,
+    value?: string | number,
     method: (NFS: string) => void,
 }
 

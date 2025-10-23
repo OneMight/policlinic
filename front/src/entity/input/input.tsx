@@ -1,6 +1,6 @@
 import type { ChangeEvent } from "react"
 import type { IInput } from "../../types/types"
-const Input = ({type, placeholder, method, width}:IInput)  =>{
+const Input = ({type, placeholder, method, width, value}:IInput)  =>{
     const handleSetData = (event: ChangeEvent<HTMLInputElement>) =>{
         method(event.target.value)
     }
@@ -11,6 +11,7 @@ const Input = ({type, placeholder, method, width}:IInput)  =>{
                  focus:bg-slate-100 transition-all delay-75 `}
                 type={type}
                 placeholder={placeholder}
+                value={value}
                 onChange={handleSetData}
                 required
             />

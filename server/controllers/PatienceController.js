@@ -13,7 +13,7 @@ class PatienceController{
         })
     }
     async createPatient(req,res){
-        const {FIO, birthday, Address, Sex, discount} = req.body;
+        const {FIO, birthday, Address, Sex, discount, idCard} = req.body;
         try{
             const patience = await Patience.create({
                 FIO_Patience:FIO,
@@ -21,6 +21,7 @@ class PatienceController{
                 Address,
                 Sex,
                 discount,
+                idCard
             })
             await Patience.update({
                 idCard: 10000 + patience.idPatience

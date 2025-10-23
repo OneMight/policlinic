@@ -1,6 +1,4 @@
-const { where } = require('sequelize');
-const {Ticket} = require('../models/model');
-const {Patience} = require('../models/model')
+const {Patience, Employee, Ticket} = require('../models/model')
 class TicketController{
     async getTickets(req,res){
         const { sortBy = 'idTicket', order = 'ASC'} = req.query;
@@ -15,8 +13,13 @@ class TicketController{
         })
     }
     async createTicket(req,res){
-        const {cost, goal, date, FIO_Patience} = req.body;
+        const {cost, goal, date, FIO_Patience, FIO_Employee, time} = req.body;
         try{
+            const employeeEntity = await Employee.findOne({
+                where:{
+                    FIO_Employee: FIO_Employee
+                }
+            })
             const patience = await Patience.findOne({
                 where:{
                     FIO_Patience: FIO_Patience,
@@ -26,8 +29,10 @@ class TicketController{
             const ticket = await Ticket.create({
                 cost,
                 goal,
+                time,
                 date,
                 idPatience: patience.idPatience,
+                idEmployee: employeeEntity.idEmployee
             })
             return res.status(200).json(ticket);
         } catch(e){

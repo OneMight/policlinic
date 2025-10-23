@@ -23,6 +23,7 @@ const Ticket = sequelize.define('Ticket',{
     cost:{type:DataTypes.DECIMAL, allowNull:false},
     goal:{type: DataTypes.STRING, allowNull:false},
     date:{type:DataTypes.DATE, allowNull:false},
+    time:{type:DataTypes.STRING, allowNull:false},
     idEmployee:{type:DataTypes.BIGINT, allowNull:false},
     idPatience:{type:DataTypes.BIGINT, allowNull:false},
 })
