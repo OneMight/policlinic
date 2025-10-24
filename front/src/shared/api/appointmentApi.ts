@@ -1,4 +1,4 @@
-import type { Appointment } from "../../types/appointment";
+import type { Appointment } from "@/types/appointment";
 import { axiosInstance } from "./index";
 
 export const createAppointment = async(diagnose: string, idTicket: number, FIO_Employee:string):

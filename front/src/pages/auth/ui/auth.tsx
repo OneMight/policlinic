@@ -1,8 +1,8 @@
-import Input from '../../../entity/input/input'
+import Input from '@/entity/input/input'
 import { useState } from 'react'
-import { isAdmin, LoginUser } from '../../../shared/api/userApi'
+import { isAdmin, LoginUser } from '@/shared/api/userApi'
 import { useNavigate } from 'react-router-dom'
-import {ROUTES} from '../../../shared/routes'
+import {ROUTES} from '@/shared/routes'
 
 export const Auth = () => {
     const navigate = useNavigate()

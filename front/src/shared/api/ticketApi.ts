@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import type { Ticket } from "../../types/ticket";
+import type { Ticket } from "@/types/ticket";
 import { axiosInstance } from "./index";
 import { createAppointment } from "./appointmentApi";
 
