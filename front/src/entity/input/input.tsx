@@ -1,9 +1,16 @@
 import type { ChangeEvent } from "react"
 import type { IInput } from "../../types/types"
-const Input = ({type, placeholder, method, width, value}:IInput)  =>{
-    const handleSetData = (event: ChangeEvent<HTMLInputElement>) =>{
-        method(event.target.value)
+const Input = ({type, placeholder, method, width, value, autoCapitalize}:IInput)  =>{
+   const handleSetData = (event: ChangeEvent<HTMLInputElement>) => {
+    let newValue = event.target.value;
+
+    if (autoCapitalize) {
+      newValue = newValue.replace(/(^\s*[а-яёa-z])|(\s+[а-яёa-z])/gi, (match) => match.toUpperCase());
     }
+
+    method(newValue);
+  };
+
     return(
             <input
                 className={`${width} p-2 pl-3 rounded-xl

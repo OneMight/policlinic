@@ -8,6 +8,7 @@ export const Auth = () => {
     const navigate = useNavigate()
     const [FNS,setFNS] = useState('')
     const [password, setPassword] = useState('')
+
     const handleLogin = async (event: React.FormEvent<HTMLFormElement>) =>{
         event.preventDefault()
         const data = await LoginUser(FNS,password)
@@ -32,7 +33,7 @@ export const Auth = () => {
                 <p className="text-2xl m-5">Авторизация</p>
             </div>
             <form onSubmit={handleLogin} className='flex flex-col items-center justify-around p-5 gap-6'>
-                <Input placeholder="Ф.И.О..." type='text' width='w-64' method={setFNS}/>
+                <Input placeholder="Ф.И.О..." type='text' width='w-64' value={FNS} autoCapitalize method={setFNS}/>
                 <Input placeholder="Пароль..." type='password' width='w-64' method={setPassword}/>
                 <button
                     className="w-36 bg-white p-1 text-xl rounded-lg mt-5

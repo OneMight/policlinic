@@ -4,6 +4,7 @@ export interface IInput{
     width: string,
     value?: string | number,
     method: (NFS: string) => void,
+    autoCapitalize?:boolean,
 }
 
 export interface User{
