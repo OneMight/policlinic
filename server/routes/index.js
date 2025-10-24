@@ -8,7 +8,7 @@ const PatienceRouter = require('./PatienceRouter')
 const ReportRouter = require('./ReportRouter')
 const TicketRouter = require('./TicketRouter')
 
-router.use('/appoitmnet',AppoitmentRouter)
+router.use('/appointment',AppoitmentRouter)
 router.use('/diagnosis',DiagnosisRouter)
 router.use('/employee',EmployeeRouter)
 router.use('/patience',PatienceRouter)
