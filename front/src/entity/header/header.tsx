@@ -10,7 +10,6 @@ export const Header = () =>{
     }
 
     const {user} = useGetDataToken()
-
     return(
         <main className="flex flex-row justify-between w-full h-[80px] bg-slate-300 items-center p-10">
             <p className="font-medium font-mono text-3xl">Поликлиника</p>
