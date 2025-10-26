@@ -1,3 +1,5 @@
+import type { Patient } from "./types"
+
 export interface Ticket{
     FIO_Employee: string,
     goal: string,
@@ -5,6 +7,7 @@ export interface Ticket{
     cost: number,
     date: Date,
     time: string,
+    Patience: Patient
     isLoading?: boolean,
     error?: Error | null,
 }

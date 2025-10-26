@@ -4,6 +4,7 @@ import {ROUTES} from '@/shared/routes'
 import { Header } from '@/entity/header'
 import { Footer } from "@/entity/footer"
 import { Admin } from "@/pages/admin/index"
+import { DoctorPage } from "@/pages/doctor/index"
 function App() {
   return (
     <main className="flex items-center justify-between flex-col min-h-screen">
@@ -14,7 +15,7 @@ function App() {
             
             <Route path={ROUTES.AUTH} element={<Auth/>}/>
             <Route path={ROUTES.ADMIN} element={<Admin/>}/>
-            
+            <Route path={ROUTES.DOCTOR} element={<DoctorPage/>}/>
           </Routes>
         </BrowserRouter>
       <Footer/>

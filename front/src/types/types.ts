@@ -12,7 +12,9 @@ export interface User{
     FIO_employee: string,
     isAdmin: boolean,
     category: Category,
+
 }
+
 export interface DataToken{
     user: User,
     isLoading?: boolean,
@@ -23,5 +25,13 @@ enum Category {
 }
 export interface CookieValues {
   name?: string;
+}
+export interface Patient{
+    FIO_Patience: string,
+    age: number,
+}
+export interface ButtonEmployeeProps{
+    placeholder: string
+    onClick?: () => void
 }
 
