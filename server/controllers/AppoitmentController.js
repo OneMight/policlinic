@@ -1,4 +1,4 @@
-const {Appoitment, Diagnosis, Employee} = require('../models/model');
+const {Appoitment, Diagnosis, Employee, Ticket, Patience} = require('../models/model');
 class AppoitmentController{
     async getAppoitment(req,res){
         const { sortBy = 'idAppoitment', order = 'ASC'} = req.query;
@@ -36,6 +36,33 @@ class AppoitmentController{
         } catch(e){
             return res.status(500).json('Internal server error '+e);
         }
+    }
+    async getAppoitmentByEmployee(req,res){
+        const {idEmployee} = req.body;
+        try{
+            const employee = await Employee.findByPk(idEmployee);
+            if(!employee){
+                return res.status(404).json({message: "Employee not found"})
+            }
+            const appoitments = await Appoitment.findAll({
+                where:{
+                    idEmployee: idEmployee,
+               
+                }, include:[{
+                    model:Ticket,
+                    include:[{
+                        model:Patience
+                    }]
+                }]
+            })
+            if(!appoitments){
+                return res.status(404).json({message: "Today you don't have appointments"})
+            }
+            return res.status(200).json(appoitments)
+        } catch (error){
+            return res.status(500).json({message: error})
+        } 
+
     }
 }
 module.exports = new AppoitmentController();
