@@ -23,5 +23,21 @@ class DiagnosisController{
             return res.status(500).json('Internal server error '+error);
         }
     }
+    async getByName(req,res){
+        const code = req.params.code
+        try{
+            const diagnose = await Diagnosis.findOne({
+                where:{
+                    code: code
+                }
+            })
+            if(!diagnose){
+                return res.status(404).json({message: 'diagnose not found'})
+            }
+            return res.status(200).json(diagnose.idDiagnose)
+        } catch(error){
+            return res.status(500).json({message: error.message})
+        }
+    }
 }
 module.exports = new DiagnosisController();

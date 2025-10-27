@@ -1,5 +1,8 @@
+const { Op } = require('sequelize');
 const {Appoitment, Diagnosis, Employee, Ticket, Patience} = require('../models/model');
+
 class AppoitmentController{
+     
     async getAppoitment(req,res){
         const { sortBy = 'idAppoitment', order = 'ASC'} = req.query;
         const where = {}
@@ -39,6 +42,9 @@ class AppoitmentController{
     }
     async getAppoitmentByEmployee(req,res){
         const {idEmployee} = req.body;
+        const currentDate = new Date(); 
+        const startOfDay = new Date(currentDate.setHours(0,0,0,0));
+        const endOfDay = new Date(currentDate.setHours(23,59,59,999));
         try{
             const employee = await Employee.findByPk(idEmployee);
             if(!employee){
@@ -47,12 +53,18 @@ class AppoitmentController{
             const appoitments = await Appoitment.findAll({
                 where:{
                     idEmployee: idEmployee,
-               
+                    diagnose: 'none'
+                    
                 }, include:[{
                     model:Ticket,
-                    include:[{
-                        model:Patience
-                    }]
+                        where: {
+                            date: {
+                                [Op.between]: [startOfDay, endOfDay]
+                            }
+                        },
+                        include:[{
+                            model:Patience
+                        }]
                 }]
             })
             if(!appoitments){
@@ -60,9 +72,27 @@ class AppoitmentController{
             }
             return res.status(200).json(appoitments)
         } catch (error){
-            return res.status(500).json({message: error})
+            return res.status(500).json({message: error.message})
         } 
-
     }
+    async updAppointment(req,res){
+        const {idAppoitment, idDiagnose, diagnosis} = req.body;
+        try{
+            const appointment = await Appoitment.findByPk(idAppoitment)
+            if(!appointment){
+                return res.status(404).json({message: "appointment not found"})
+            }
+            const updAppointment = await appointment.update({
+                diagnose: diagnosis,
+                idDiagnose: idDiagnose
+            })
+            return res.status(200).json(updAppointment)
+        } catch (error){
+            return res.status(500).json(error)
+        }
+       
+    }
+  
+
 }
 module.exports = new AppoitmentController();

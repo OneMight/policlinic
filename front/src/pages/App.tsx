@@ -7,7 +7,7 @@ import { Admin } from "@/pages/admin/index"
 import { DoctorPage } from "@/pages/doctor/index"
 function App() {
   return (
-    <main className="flex items-center justify-between flex-col min-h-screen">
+    <main className="flex items-center justify-between flex-col min-h-screen min-w-[768px]">
 
         <BrowserRouter>
         <Header/>
