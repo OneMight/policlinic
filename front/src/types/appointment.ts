@@ -1,7 +1,7 @@
 import type { Ticket } from "./ticket";
 
 export interface Appointment{
-    Ticket: Ticket
+    Ticket: Ticket,
     diagnose: string,
     idAppoitment: number,
     isLoading?: boolean,
@@ -17,4 +17,10 @@ export interface PatientDivProps{
 export interface AppointmentDescProps{
     selectAppointment:Appointment | undefined
      setSelectedApp: (value: null) => void,
+}
+
+export interface UpdAppointmentProps{
+    idAppoitment: number,
+    idDiagnose: number,
+    diagnose: string
 }

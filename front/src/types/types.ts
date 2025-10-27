@@ -35,3 +35,14 @@ export interface ButtonEmployeeProps{
     onClick?: () => void
 }
 
+export interface Diagnosis{
+    code: string,
+    name: string,
+    id: number
+}
+export interface DiagnosisProps{
+    diagnosis: Diagnosis[],
+    handleSetIdDiagnose: (event: React.ChangeEvent<HTMLSelectElement>)=> void
+}
+
+
