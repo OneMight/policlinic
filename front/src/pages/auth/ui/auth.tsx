@@ -20,9 +20,6 @@ export const Auth = () => {
                 navigate(ROUTES.DOCTOR)
             }
          
-        }else{
-               //Изменить на алерт меню
-           console.log(data)
         }
         
     }

@@ -24,7 +24,6 @@ export const DoctorPage = () =>{
     const handleSetSelected = (id:number) =>{
         setSelected(id)
     }
-    console.log(appointents)
 
 
    

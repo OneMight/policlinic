@@ -39,7 +39,7 @@ export const Logout = async () =>{
     try{
         axiosInstance.post('api/employee/logout')
     } catch(error){
-        console.log(error)
+        return error
     }
 }
 export const isAdmin = async(FNS:string) : Promise<boolean | unknown> =>  {

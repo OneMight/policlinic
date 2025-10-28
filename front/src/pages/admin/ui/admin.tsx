@@ -33,7 +33,7 @@ export const Admin = () =>{
             try{
             createTicket(FIO_Patience, FIO_Employee, date, time, goal, cost, diagnose)
             } catch(error){
-                console.log(error)
+                return error
             }
    
     }
