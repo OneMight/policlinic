@@ -31,7 +31,7 @@ export interface Patient{
     age: number,
     discount?: number
 }
-export interface ButtonEmployeeProps{
+export interface ButtonProps{
     placeholder: string
     onClick?: () => void
 }
@@ -59,3 +59,9 @@ export interface Reports{
     allRep: Report[],
 }
 
+export interface GenerateReport{
+    rep: Report[],
+    name: string,
+    doctorCount: number,
+    allLength: number | undefined
+}

@@ -161,7 +161,7 @@ export default function EnhancedTable() {
 
     
     const rows = rep.map(report=>( 
-        createData(report.idAppoitment,report.patientFIO, report.diagnose, report.cost, report.cost == 0? 'Бесплатно' : 0,  report.discount)
+        createData(report.idAppoitment,report.patientFIO, report.diagnose, report.cost, report.cost == 0? 'Бесплатно' : 0, report.discount)
     ))
   const handleRequestSort = (
     event: React.MouseEvent<unknown>,
@@ -262,8 +262,8 @@ export default function EnhancedTable() {
                   >
                     <TableCell align="center">{row.name}</TableCell>
                     <TableCell align="center">{row.diagnose}</TableCell>
-                    <TableCell align="center">{row.cost}</TableCell>
-                    <TableCell align="center">{row.discount}</TableCell>
+                    <TableCell align="center">{row.cost} руб.</TableCell>
+                    <TableCell align="center">{row.discount} %</TableCell>
                     <TableCell align="center">{row.payed}</TableCell>
                   </TableRow>
                 );

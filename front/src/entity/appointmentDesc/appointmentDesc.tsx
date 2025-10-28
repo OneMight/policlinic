@@ -1,5 +1,5 @@
 import { getidDiagnose, useGetDiagnosis } from "@/shared/api/diagnoseApi"
-import {ButtonEmployee} from "@/shared/assets/buttonEmployee"
+import {ButtonFunc} from "@/shared/assets/buttonFunc"
 import type { AppointmentDescProps } from "@/types/appointment"
 import OptionDiagnosis from "@/shared/assets/optionDiagnosis"
 import { useState, type ChangeEvent } from "react"
@@ -55,8 +55,8 @@ export const AppointmentDesc = ({selectAppointment, setSelectedApp} : Appointmen
                 </div>
             </div>
             <div className="flex flex-row justify-around items-center w-full mb-8">
-                    <ButtonEmployee placeholder='Назад' onClick={() =>setSelectedApp(null)}/>
-                    <ButtonEmployee placeholder='Подтвердить' onClick={() => handleUpdAppointment()}/>
+                    <ButtonFunc placeholder='Назад' onClick={() =>setSelectedApp(null)}/>
+                    <ButtonFunc placeholder='Подтвердить' onClick={() => handleUpdAppointment()}/>
             </div>
         </div>
         

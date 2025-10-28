@@ -1,6 +1,6 @@
-import type {ButtonEmployeeProps} from '@/types/types'
+import type {ButtonProps} from '@/types/types'
 
-export const ButtonEmployee = ({placeholder, onClick}:ButtonEmployeeProps) =>{
+export const ButtonFunc = ({placeholder, onClick}:ButtonProps) =>{
     return(
         <button
         onClick={onClick}
@@ -10,4 +10,4 @@ export const ButtonEmployee = ({placeholder, onClick}:ButtonEmployeeProps) =>{
     )
 }
 
-export default ButtonEmployee
+export default ButtonFunc
