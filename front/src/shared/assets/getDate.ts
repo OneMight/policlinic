@@ -9,3 +9,8 @@ export const convertDate = (date: Date, time: string) =>{
     `${dateObj.getMonth()+1<10? `0${dateObj.getMonth()+1}`:`${dateObj.getMonth()+1}`}.`+
     `${dateObj.getFullYear()} ${time}`
 }
+
+export const getCurrentYear = () =>{
+    const date = new Date()
+    return `${date.getFullYear()}`
+}

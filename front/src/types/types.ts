@@ -29,6 +29,7 @@ export interface CookieValues {
 export interface Patient{
     FIO_Patience: string,
     age: number,
+    discount?: number
 }
 export interface ButtonEmployeeProps{
     placeholder: string
@@ -45,4 +46,16 @@ export interface DiagnosisProps{
     handleSetIdDiagnose: (event: React.ChangeEvent<HTMLSelectElement>)=> void
 }
 
+export interface Report{
+    idAppoitment: number,
+    diagnose: string,
+    Employee: string,
+    cost: number,
+    patientFIO: string,
+    discount: number
+}
+export interface Reports{
+    rep: Report[],
+    allRep: Report[],
+}
 

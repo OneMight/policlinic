@@ -3,6 +3,6 @@ const router = new Router()
 const ReportController = require('../controllers/ReportController');
 
 router.get('/', ReportController.getReports);
-// router.post('/create',ReportController.createReport);
+router.post('/getByDate',ReportController.getReportByDate);
 
 module.exports = router
